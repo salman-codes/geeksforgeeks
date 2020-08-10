@@ -6,7 +6,18 @@ PROBLEM_URL: https://practice.geeksforgeeks.org/problems/kadanes-algorithm/0
 
 @author: Salman.Akhatar
 """
-def input_array(elements=0):
+def find_subarr(arr):
+    temp = 0
+    for val in arr:
+        temp += val
+        if temp < val:
+            temp -= val
+    
+    if not temp:
+        return arr[0]
+    return temp
+
+def input_array():
     temp = input("Input Array Elelments: ")
     temp = temp.split(" ")
     arr = [int(el) for el in temp]
@@ -16,12 +27,13 @@ def input_array(elements=0):
 if __name__ == "__main__":
     testcases = int(input("Number of Testcases: "))
     
-    sum_to_find = []
-    values = []
+    array = []
     for i in range(testcases):    
-        input_1 = input("Testcase Number {0}: ".format(i+1))
-        input_1 = list(input_1.split(" "))
-        input_1 = [int(el) for el in input_1]
-        sum_to_find.append(input_1[1])
-        temp = input_array(input_1[0])
-        values.append(temp)
+        num_of_elms = input("No. f Elements in TC {0}: ".format(i+1))
+        num_of_elms = int(num_of_elms)
+        temp = input_array()
+        array.append(temp[:num_of_elms])
+    
+    for arr in array:
+        print(find_subarr(arr))
+
